@@ -6,6 +6,7 @@ export interface Article {
   title: string;
   author: string;
   url: string;
+  permalink: string;
   created: number;
 
   selftext: string;
@@ -25,7 +26,8 @@ export class ArticleMapper implements Article {
     this.title = props.data.title;
     this.author = props.data.author;
     this.url = props.data.url;
-    this.created = props.data.created;
+    this.permalink = props.data.permalink;
+    this.created = props.data.created * 1000;
     this.selftext = props.data.selftext;
     this.selftext_html = props.data.selftext_html;
     this.thumbnail = props.data.thumbnail;
@@ -39,6 +41,7 @@ export class ArticleMapper implements Article {
   title: string;
   author: string;
   url: string;
+  permalink: string;
   created: number;
   selftext: string;
   selftext_html: string;

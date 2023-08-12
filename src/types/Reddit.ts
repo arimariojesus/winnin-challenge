@@ -5,6 +5,7 @@ export interface ChildrenResponse {
     title: string;
     author: string;
     url: string;
+    permalink: string;
     created: number;
 
     selftext: string;
