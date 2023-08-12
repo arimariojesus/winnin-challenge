@@ -9,7 +9,7 @@ const theme = extendTheme({
       '#root, body': {
         bg: 'brand.gray.900',
         color: 'white',
-        minHeight: '100%',
+        minHeight: '100vh',
       },
     },
   },
