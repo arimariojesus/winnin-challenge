@@ -23,6 +23,7 @@ export const Header = () => {
       bg="brand.gray.900"
       pos="sticky"
       top="0"
+      zIndex="sticky"
       justifyContent="center"
       alignItems="center"
       borderBottomWidth="1px"
