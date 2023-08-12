@@ -1,10 +1,11 @@
-import { Flex } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { Header } from '@/components/Header';
 
 function App() {
   return (
-    <Flex w="100%" h="100vh" overflow="hidden">
-      <h1>Hello World</h1>
-    </Flex>
+    <Box w="100%">
+      <Header />
+    </Box>
   );
 }
 
