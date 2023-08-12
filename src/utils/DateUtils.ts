@@ -45,5 +45,7 @@ export class DateUtils {
     if (diffSeconds > 0) {
       return `há ${diffSeconds} seg`;
     }
+
+    return '';
   }
 }
