@@ -1,21 +1,9 @@
-import { ReactIcon } from '@/assets/icons';
-import { Flex, HStack, Heading, Text } from '@chakra-ui/react';
+import { memo } from 'react';
+import { Flex } from '@chakra-ui/react';
 
-const CustomLogo = () => {
-  return (
-    <HStack>
-      <ReactIcon />
-      <Heading>
-        REACT
-        <Text as="span" color="brand.winnin">
-          JS
-        </Text>
-      </Heading>
-    </HStack>
-  );
-};
+import LogoButton from '@/components/LogoButton';
 
-export const Header = () => {
+const Header = () => {
   return (
     <Flex
       as="header"
@@ -29,7 +17,9 @@ export const Header = () => {
       borderBottomWidth="1px"
       borderBottomColor="brand.whiteAlpha.100"
     >
-      <CustomLogo />
+      <LogoButton />
     </Flex>
   );
 };
+
+export default memo(Header);
