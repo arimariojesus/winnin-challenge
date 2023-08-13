@@ -1,4 +1,4 @@
-import { ChildrenResponse } from '@/types/Reddit';
+import { ChildrenResponse } from '@/types/Subreddit';
 
 export interface Article {
   id: string;
@@ -20,34 +20,22 @@ export interface Article {
   link_flair_text_color: 'dark' | 'light';
 }
 
-export class ArticleMapper implements Article {
-  constructor(props: ChildrenResponse) {
-    this.id = props.data.id;
-    this.title = props.data.title;
-    this.author = props.data.author;
-    this.url = props.data.url;
-    this.permalink = props.data.permalink;
-    this.created = props.data.created * 1000;
-    this.selftext = props.data.selftext;
-    this.selftext_html = props.data.selftext_html;
-    this.thumbnail = props.data.thumbnail;
-    this.url_overridden_by_dest = props.data.url_overridden_by_dest;
-    this.link_flair_text = props.data.link_flair_text;
-    this.link_flair_background_color = props.data.link_flair_background_color;
-    this.link_flair_text_color = props.data.link_flair_text_color;
+export class ArticleMapper {
+  static childrenToArticle(children: ChildrenResponse): Article {
+    return {
+      id: children.data.id,
+      title: children.data.title,
+      author: children.data.author,
+      url: children.data.url,
+      permalink: children.data.permalink,
+      created: children.data.created * 1000,
+      selftext: children.data.selftext,
+      selftext_html: children.data.selftext_html,
+      thumbnail: children.data.thumbnail,
+      url_overridden_by_dest: children.data.url_overridden_by_dest,
+      link_flair_text: children.data.link_flair_text,
+      link_flair_background_color: children.data.link_flair_background_color,
+      link_flair_text_color: children.data.link_flair_text_color,
+    };
   }
-
-  id: string;
-  title: string;
-  author: string;
-  url: string;
-  permalink: string;
-  created: number;
-  selftext: string;
-  selftext_html: string;
-  thumbnail: string;
-  url_overridden_by_dest?: string | undefined;
-  link_flair_text: string | null;
-  link_flair_background_color: string;
-  link_flair_text_color: 'dark' | 'light';
 }
