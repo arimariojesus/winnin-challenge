@@ -20,10 +20,34 @@ export interface ChildrenResponse {
   };
 }
 
-export interface RedditCommonResponse {
+export type ListingsType = 'hot' | 'new' | 'rising';
+
+export interface SubredditCommonResponse {
   data: {
     after: string | null;
     before: string | null;
     children: ChildrenResponse[];
   };
+}
+
+export enum SUBREDDIT_TYPE {
+  REACT,
+  VUE,
+  ANGULAR,
+}
+
+export class SubredditItem {
+  constructor(props: SubredditItem) {
+    this.id = props.id;
+    this.label = props.label;
+    this.value = props.value;
+    this.icon = props.icon;
+    this.color = props.color;
+  }
+
+  public id: SUBREDDIT_TYPE;
+  public label: string;
+  public value: string;
+  public icon: JSX.Element;
+  public color: string;
 }
