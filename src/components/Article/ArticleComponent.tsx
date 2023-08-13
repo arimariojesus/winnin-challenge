@@ -1,18 +1,22 @@
+import { memo } from 'react';
 import { Card, CardBody, CardHeader, HStack, Heading, Image, Link, Tag, Text, VStack } from '@chakra-ui/react';
 
 import { Article as IArticle } from '@/types/Article';
-import { BASE_URL as REDDIT_BASE_URL } from '@/services/api/redditApi';
-import { DateUtils, UrlUtils } from '@/utils';
-import { ArticleSkeleton } from './ArticleSkeleton';
+import { ArticleUtils, DateUtils, UrlUtils } from '@/utils';
 
 interface ArticleProps {
-  isLoading?: boolean;
   article: IArticle;
 }
 
-export const Article = ({ isLoading, article }: ArticleProps) => {
-  return !isLoading ? (
-    <Link href={REDDIT_BASE_URL + article.permalink} target="_blank" w="100%" _hover={{ textDecor: 'none' }}>
+const ArticleComponent = ({ article }: ArticleProps) => {
+  return (
+    <Link
+      href={ArticleUtils.getArticleUrl(article.permalink)}
+      aria-describedby={`article-title-${article.id}`}
+      target="_blank"
+      w="100%"
+      _hover={{ textDecor: 'none' }}
+    >
       <Card
         bg="transparent"
         color="brand.white"
@@ -23,7 +27,7 @@ export const Article = ({ isLoading, article }: ArticleProps) => {
       >
         <CardHeader px={2} py={3}>
           <HStack fontSize={{ base: 'sm', md: 'md' }}>
-            <Text fontWeight="semibold">u/{article.author}</Text>
+            <Text fontWeight="semibold">{ArticleUtils.getRedditAuthor(article.author)}</Text>
             <Text>&#8226;</Text>
             <Text>{DateUtils.getTimeAgo(Date.now(), article.created)}</Text>
           </HStack>
@@ -32,7 +36,7 @@ export const Article = ({ isLoading, article }: ArticleProps) => {
         <CardBody px={2} py={3}>
           <HStack alignItems="flex-start" spacing={4} justifyContent="space-between">
             <VStack alignItems="flex-start" spacing={6} flex={1}>
-              <Heading as="h4" fontSize={{ base: 'md', sm: 'lg', md: '2xl' }}>
+              <Heading as="h4" fontSize={{ base: 'md', sm: 'lg', md: '2xl' }} id={`article-title-${article.id}`}>
                 {article.title}
               </Heading>
               {!!article.link_flair_text && (
@@ -46,10 +50,10 @@ export const Article = ({ isLoading, article }: ArticleProps) => {
               )}
             </VStack>
             {UrlUtils.isValidUrl(article.thumbnail) && (
-              <Link href={article.url_overridden_by_dest || ''} target="_blank">
+              <Link href={article.url_overridden_by_dest || ''} target="_blank" aria-label="Thumbnail">
                 <Image
                   src={article.thumbnail}
-                  fallbackSrc="https://via.placeholder.com/184x140"
+                  alt={article.title}
                   borderRadius={16}
                   width={{ base: 114, md: 184 }}
                   height={{ base: 86, md: 140 }}
@@ -60,7 +64,9 @@ export const Article = ({ isLoading, article }: ArticleProps) => {
         </CardBody>
       </Card>
     </Link>
-  ) : (
-    <ArticleSkeleton />
   );
 };
+
+const Article = memo(ArticleComponent);
+
+export { Article };
