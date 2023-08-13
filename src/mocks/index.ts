@@ -1,2 +1,6 @@
 import hotJsonData from './hot.json';
-export { hotJsonData };
+import newsJsonData from './new.json';
+import risingJsonData from './rising.json';
+
+export * from './articles';
+export { hotJsonData, newsJsonData, risingJsonData };
