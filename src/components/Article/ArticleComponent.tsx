@@ -29,7 +29,7 @@ const ArticleComponent = ({ article }: ArticleProps) => {
           <HStack fontSize={{ base: 'sm', md: 'md' }}>
             <Text fontWeight="semibold">{ArticleUtils.getRedditAuthor(article.author)}</Text>
             <Text>&#8226;</Text>
-            <Text>{DateUtils.getTimeAgo(Date.now(), article.created)}</Text>
+            <Text>há {DateUtils.getUnitTimeDiff(Date.now(), article.created)}</Text>
           </HStack>
         </CardHeader>
 
@@ -50,7 +50,7 @@ const ArticleComponent = ({ article }: ArticleProps) => {
               )}
             </VStack>
             {UrlUtils.isValidUrl(article.thumbnail) && (
-              <Link href={article.url_overridden_by_dest || ''} target="_blank" aria-label="Thumbnail">
+              <Link href={article.url_overridden_by_dest} target="_blank" aria-label="Thumbnail">
                 <Image
                   src={article.thumbnail}
                   alt={article.title}

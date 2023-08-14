@@ -27,23 +27,23 @@ export class DateUtils {
     };
   }
 
-  static getTimeAgo(date1: Date | number, date2: Date | number) {
-    const { diffDays, diffHours, diffMinutes, diffSeconds } = this.getDiffTimes(date1, date2);
+  static getUnitTimeDiff(lastDate: Date | number, currentDate: Date | number) {
+    const { diffDays, diffHours, diffMinutes, diffSeconds } = this.getDiffTimes(lastDate, currentDate);
 
     if (diffDays > 0) {
-      return `há ${diffDays} ${diffDays > 1 ? 'dias' : 'dia'}`;
+      return `${diffDays} ${diffDays > 1 ? 'dias' : 'dia'}`;
     }
 
     if (diffHours > 0) {
-      return `há ${diffHours} h`;
+      return `${diffHours} h`;
     }
 
     if (diffMinutes > 0) {
-      return `há ${diffMinutes} min`;
+      return `${diffMinutes} min`;
     }
 
     if (diffSeconds > 0) {
-      return `há ${diffSeconds} seg`;
+      return `${diffSeconds} seg`;
     }
 
     return '';
