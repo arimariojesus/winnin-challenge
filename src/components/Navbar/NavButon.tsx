@@ -14,6 +14,7 @@ export const NavButton = ({ children, isActive, activeColor, onClick }: NavButto
       p={2}
       color="brand.white"
       bg={isActive ? activeColor : 'brand.gray.600'}
+      aria-current={isActive}
       _hover={{ opacity: 0.8 }}
       _active={{ opacity: 0.9 }}
       onClick={onClick}
