@@ -13,6 +13,8 @@
     "format": "prettier \"src/**/*.{js,jsx,ts,tsx,css,scss}\" --write",
     "compile": "tsc",
     "test": "jest",
+    "test:cov": "yarn clean:cov && yarn test --coverage",
+    "clean:cov": "rimraf coverage",
     "commit": "cz"
   },
   "config": {

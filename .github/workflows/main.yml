@@ -35,4 +35,10 @@ jobs:
         run: yarn lint
 
       - name: Run tests
-        run: yarn test
+        run: yarn test:cov
+
+      - name: Coveralls GitHub Actions
+        if: github.ref == 'refs/heads/main'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
