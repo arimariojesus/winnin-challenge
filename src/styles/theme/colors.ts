@@ -15,6 +15,7 @@ const colors = {
     vue: '#1D9F65',
     angular: '#AC1B3B',
     winnin: '#6324C6',
+    'winnin-light': '#9B6CE4',
   },
 };
 
