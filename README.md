@@ -4,6 +4,8 @@
 
 The challenge consists fof reading data from the [Reddit API](https://www.reddit.com/dev/api), from the [reactjs](https://www.reddit.com/r/reactjs/) subreddit and creating a React application containing the information of the articles.
 
+[![Coverage Status](https://coveralls.io/repos/github/arimariojesus/winnin-challenge/badge.svg?branch=main)](https://coveralls.io/github/arimariojesus/winnin-challenge?branch=main)
+
 ## Tecnologies
 
 - ⚡️ [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
