@@ -1,27 +1,8 @@
-# Pokédex Challenge
+# Winnin Challenge
 
 ## What's it?
 
-This project aims to solve the following challenge:
-
-Using the free [PokeAPI API](https://pokeapi.co), develop a dashboard composed of two distinct sections/screens.
-
-**Home screen:**
-
-On this screen, the user will be able to enter the name of the desired Pokémon. After insertion, the following data will be displayed:
-
-Pokemon photo (sprite);
-Pokémon moves;
-
-**Second Section/Screen:**
-
-This section will be dedicated to listing all Pokémon available in the API. Only the name and photo (sprite) of each Pokémon will be presented,
-Navigation performed through pagination.
-
-*Note: It is imperative that the dashboard design is clear and intuitive,
-providing the user with a friendly experience during its use. In addition
-In addition, ensure that all information is accurate and comes from
-directly from PokeAPI.*
+The challenge consists fof reading data from the [Reddit API](https://www.reddit.com/dev/api), from the [reactjs](https://www.reddit.com/r/reactjs/) subreddit and creating a React application containing the information of the articles.
 
 ## Tecnologies
 
@@ -34,22 +15,25 @@ directly from PokeAPI.*
 - 🌀 [Prettier](https://prettier.io) - Opinionated Code Formatter
 - 🐺 [Husky](https://github.com/typicode/husky) - Native Git hooks
 - ⚙️ [Jest](https://jestjs.io/) - Testing libraries
-- ⌨️ Absolute Imports
 - 📑 [Commitlint](https://commitlint.js.org/) - Linting your commits based on commit convention
 
-### Run Project
+## Design
 
-#### Prerequisites
+The entire design of the project, both desktop and mobile, can be seen on [Figma](https://www.figma.com/file/31bPJFUhtiICIhAah5xpSH/Winnin-Challenge?type=design&node-id=66%3A189&mode=design&t=oit3SoMujHajLFrl-1).
+
+## Run Project
+
+### Prerequisites
 
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/en/)
+- [Node.js](https://nodejs.org/en/) >= v18.17.0
 
 ```bash
 # Clone project
-$ git clone https://github.com/arimariojesus/cyberlabs-challenge.git
+$ git clone https://github.com/arimariojesus/winnin-challenge.git
 
 # Access project folder
-$ cd cyberlabs-challenge
+$ cd winnin-challenge
 
 # Install the dependencies
 $ yarn install
@@ -76,19 +60,9 @@ Your server will be online on host http://localhost:5173
 | yarn test     | Run the app tests.                                                          |
 | yarn commit   | Open the CZ CLI to create a message to your commit.                         |
 
-## Features
-
-- [x] Search Pokémon
-- [x] List Pokémons
-- [x] Pokémon details page
-- [x] Paginate list of Pokémons
-- [x] Paginate list of moves
-- [x] Copy Pokémon number
-- [x] Responsiveness
-
 ## Deploy
 
-https://cyberlabs-pokedex-challenge.vercel.app/
+https://winnin-challenge-arimariojesus.vercel.app/
 
 ## License
 
