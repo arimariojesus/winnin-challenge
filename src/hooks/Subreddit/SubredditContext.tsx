@@ -5,16 +5,16 @@ import { SUBREDDIT_ITEMS } from './SubredditContextData';
 
 interface ListingContextData {
   onNext: () => void;
-  current: SubredditItem;
+  currentSubreddit: SubredditItem;
 }
 
 export const SubredditContext = createContext<ListingContextData | null>(null);
 
 export const SubredditProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [current, setCurrent] = useState(SUBREDDIT_ITEMS[0]);
+  const [currentSubreddit, setCurrentSubreddit] = useState(SUBREDDIT_ITEMS[0]);
 
   const onNext = () => {
-    setCurrent((prev) => {
+    setCurrentSubreddit((prev) => {
       const last = SUBREDDIT_ITEMS.at(-1);
 
       if (last?.id === prev.id) {
@@ -32,7 +32,7 @@ export const SubredditProvider: React.FC<React.PropsWithChildren> = ({ children 
     <SubredditContext.Provider
       value={{
         onNext,
-        current,
+        currentSubreddit,
       }}
     >
       {children}

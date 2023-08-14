@@ -6,13 +6,13 @@ import { navItems } from './NavbarData';
 
 export const NavbarContainer = () => {
   const { changeListing, currentListingType } = useListings();
-  const { current } = useSubReddit();
+  const { currentSubreddit } = useSubReddit();
 
   return (
     <NavbarComponent
       items={navItems}
       current={currentListingType}
-      activeColor={current.color}
+      activeColor={currentSubreddit.color}
       onChange={changeListing}
     />
   );
