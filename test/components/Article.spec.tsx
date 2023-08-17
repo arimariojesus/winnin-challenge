@@ -17,82 +17,50 @@ const makeSut = (props?: SutProps) => {
     ...props,
   };
 
-  render(<Article {...componentProps} />);
-
-  return {
-    ...componentProps,
-  };
+  return <Article {...componentProps} />;
 };
 
 describe('Article Component', () => {
   it('should renders article with correct author and title', () => {
-    makeSut();
+    render(makeSut());
 
-    expect(screen.getByText(ArticleUtils.getRedditAuthor(mockArticle.author))).toBeInTheDocument();
+    expect(screen.getByText(mockArticle.author)).toBeInTheDocument();
     expect(screen.getByText(mockArticle.title)).toBeInTheDocument();
   });
 
-  it('should renders link flair tag if available', () => {
-    makeSut();
+  it('should renders article link with correct href', () => {
+    render(makeSut());
 
-    const tagElement = screen.getByText(mockArticle.link_flair_text as string);
+    const articleLink = screen.getByRole('link', { name: mockArticle.title });
 
-    expect(tagElement).toBeInTheDocument();
+    expect(articleLink).toHaveAttribute('href', ArticleUtils.getArticleUrl(mockArticle.permalink));
   });
 
-  it('should renders link flair tag with correct styles', () => {
-    makeSut();
+  it('should renders article thumbnail if has a valid thumbnail', () => {
+    render(makeSut());
 
-    const tagElement = screen.getByText(mockArticle.link_flair_text as string);
-
-    expect(tagElement).toHaveStyle({
-      'background-color': mockArticle.link_flair_background_color,
-      color: 'brand.white',
-    });
-
-    makeSut({ article: { ...mockArticle, link_flair_text_color: 'dark' } });
-
-    expect(tagElement).toHaveStyle({
-      'background-color': mockArticle.link_flair_background_color,
-      color: 'brand.black',
-    });
-  });
-
-  it('should renders article thumbnail if valid URL', () => {
-    makeSut();
-
-    const thumbnail = screen.getByRole('img');
+    const thumbnail = screen.getByRole('img', { name: mockArticle.title });
 
     expect(thumbnail).toBeInTheDocument();
     expect(thumbnail).toHaveAttribute('src', mockArticle.thumbnail);
   });
 
-  it('should not renders thumbnail if URL is not valid', () => {
-    const invalidThumbnailArticle = {
+  it('should renders correct domain', () => {
+    const { rerender } = render(makeSut());
+
+    let domainElement = screen.getByText(mockArticle.subreddit_name);
+
+    expect(domainElement).toBeInTheDocument();
+
+    const externalDomainArticle = {
       ...mockArticle,
-      thumbnail: 'invalid-url',
+      domain: 'external-domain',
     };
 
-    makeSut({ article: invalidThumbnailArticle });
+    rerender(makeSut({ article: externalDomainArticle }));
 
-    const fallbackThumbnail = screen.queryByRole('img');
+    domainElement = screen.getByText(externalDomainArticle.domain);
 
-    expect(fallbackThumbnail).not.toBeInTheDocument();
-  });
-
-  it('should renders thumbnail link with correct href if overridden', () => {
-    makeSut();
-
-    const thumbnailLink = screen.getByRole('link', { name: 'Thumbnail' });
-
-    expect(thumbnailLink).toHaveAttribute('href', mockArticle.url_overridden_by_dest);
-  });
-
-  it('should renders article link with correct href', () => {
-    makeSut();
-
-    const articleLink = screen.getByRole('link', { description: mockArticle.title });
-
-    expect(articleLink).toHaveAttribute('href', ArticleUtils.getArticleUrl(mockArticle.permalink));
+    expect(domainElement).toBeInTheDocument();
   });
 });

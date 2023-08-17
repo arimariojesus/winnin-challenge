@@ -7,11 +7,16 @@ const theme = extendTheme({
   styles: {
     global: {
       '#root, body': {
-        bg: 'brand.gray.900',
-        color: 'white',
+        bg: 'white',
+        color: 'black',
         minHeight: '100vh',
       },
     },
+  },
+  fonts: {
+    body: 'Mulish, sans-serif',
+    heading: 'Mulish, sans-serif',
+    text: 'Mulish, sans-serif',
   },
 });
 

@@ -1,25 +1,26 @@
 import { render, fireEvent, screen } from '@testing-library/react';
-import { NavbarComponent } from '@/components/Navbar/NavbarComponent';
-import { NavItem } from '@/components/Navbar/NavbarModel';
+import Navbar from '@/components/Navbar';
+// import { NavItem } from '@/components/Navbar/NavbarModel';
 import React from 'react';
+import { navItems } from '@/components/Navbar/NavbarData';
 
-const item1 = new NavItem({ label: 'Test 1', value: 'hot' });
-const item2 = new NavItem({ label: 'Test 2', value: 'new' });
-const item3 = new NavItem({ label: 'Test 3', value: 'rising' });
+// const item1 = new NavItem({ label: 'Test 1', value: 'hot' });
+// const item2 = new NavItem({ label: 'Test 2', value: 'new' });
+// const item3 = new NavItem({ label: 'Test 3', value: 'rising' });
+const item1 = navItems[0];
+const item2 = navItems[1];
 
-const mockItems = [item1, item2, item3];
+const mockItems = [...navItems];
 
-type ComponentProps = React.ComponentProps<typeof NavbarComponent>;
+type ComponentProps = React.ComponentProps<typeof Navbar>;
 
 const mockProps: ComponentProps = {
-  items: mockItems,
   current: item1.value,
-  activeColor: 'blue',
   onChange: () => {},
 };
 
 const makeSut = (props?: Partial<ComponentProps>) => {
-  return <NavbarComponent {...{ ...mockProps, ...props }} />;
+  return <Navbar {...{ ...mockProps, ...props }} />;
 };
 
 describe('NavbarComponent', () => {
@@ -37,22 +38,6 @@ describe('NavbarComponent', () => {
 
     const activeItem = screen.getByRole('button', { current: true });
     expect(activeItem).toHaveTextContent(item2.label);
-  });
-
-  it('should active item has the correct background color', () => {
-    const { rerender } = render(makeSut({ activeColor: 'blue' }));
-
-    let activeItem = screen.getByRole('button', { current: true });
-    expect(activeItem).toHaveStyle({
-      'background-color': 'blue',
-    });
-
-    rerender(makeSut({ activeColor: 'red' }));
-
-    activeItem = screen.getByRole('button', { current: true });
-    expect(activeItem).toHaveStyle({
-      'background-color': 'red',
-    });
   });
 
   it('should calls onChange when an item is clicked', () => {

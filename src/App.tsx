@@ -1,20 +1,20 @@
 import { Box, Container } from '@chakra-ui/react';
 
 import Header from '@/components/Header';
-import Navbar from '@/components/Navbar';
-import ArticlesList from '@/components/ArticlesList';
+import { ArticlesProvider } from '@/hooks/Articles/ArticlesContext';
+import Main from '@/templates/Main';
 
 function App() {
   return (
-    <Box w="100%">
-      <Header />
+    <ArticlesProvider>
+      <Box w="100%" pb={8}>
+        <Header />
 
-      <Container maxW="container.lg">
-        <Navbar />
-
-        <ArticlesList />
-      </Container>
-    </Box>
+        <Container maxW="container.xl">
+          <Main />
+        </Container>
+      </Box>
+    </ArticlesProvider>
   );
 }
 

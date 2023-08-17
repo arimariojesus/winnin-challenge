@@ -7,12 +7,14 @@ export interface ChildrenResponse {
     url: string;
     permalink: string;
     created: number;
+    domain: string;
 
     selftext: string;
     selftext_html: string;
 
     thumbnail: string;
     url_overridden_by_dest?: string;
+    subreddit_name_prefixed: string;
 
     link_flair_text: string | null;
     link_flair_background_color: string;

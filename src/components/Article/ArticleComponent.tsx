@@ -1,72 +1,56 @@
-import { memo } from 'react';
-import { Card, CardBody, CardHeader, HStack, Heading, Image, Link, Tag, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, Image, Link, Text } from '@chakra-ui/react';
 
-import { Article as IArticle } from '@/types/Article';
-import { ArticleUtils, DateUtils, UrlUtils } from '@/utils';
+import { Article } from '@/types/Article';
+import { DateUtils, ArticleUtils } from '@/utils';
 
-interface ArticleProps {
-  article: IArticle;
+interface ArticleComponentProps {
+  article: Article;
 }
 
-const ArticleComponent = ({ article }: ArticleProps) => {
+export const ArticleComponent = ({ article }: ArticleComponentProps) => {
   return (
-    <Link
-      href={ArticleUtils.getArticleUrl(article.permalink)}
-      aria-describedby={`article-title-${article.id}`}
-      target="_blank"
-      w="100%"
-      _hover={{ textDecor: 'none' }}
-    >
-      <Card
-        bg="transparent"
-        color="brand.white"
-        borderRadius={16}
-        p={3}
-        _hover={{ bg: 'brand.whiteAlpha.50' }}
-        pos="relative"
-      >
-        <CardHeader px={2} py={3}>
-          <HStack fontSize={{ base: 'sm', md: 'md' }}>
-            <Text fontWeight="semibold">{ArticleUtils.getRedditAuthor(article.author)}</Text>
-            <Text>&#8226;</Text>
-            <Text>há {DateUtils.getUnitTimeDiff(Date.now(), article.created)}</Text>
-          </HStack>
-        </CardHeader>
+    <Box w="full" borderTopWidth="1px" borderTopColor="#000" py="12px">
+      <HStack w="full" spacing="12px">
+        <Image
+          src={article.thumbnail}
+          alt={article.title}
+          fallbackSrc="/images/default-image.jpg"
+          fallbackStrategy="onError"
+          borderRadius="8px"
+          objectFit="cover"
+          bg="gray.500"
+          w="77px"
+          h="77px"
+        />
 
-        <CardBody px={2} py={3}>
-          <HStack alignItems="flex-start" spacing={4} justifyContent="space-between">
-            <VStack alignItems="flex-start" spacing={6} flex={1}>
-              <Heading as="h4" fontSize={{ base: 'md', sm: 'lg', md: '2xl' }} id={`article-title-${article.id}`}>
-                {article.title}
-              </Heading>
-              {!!article.link_flair_text && (
-                <Tag
-                  borderRadius="full"
-                  bg={article.link_flair_background_color}
-                  color={article.link_flair_text_color === 'dark' ? 'brand.black' : 'brand.white'}
-                >
-                  {article.link_flair_text}
-                </Tag>
-              )}
-            </VStack>
-            {UrlUtils.isValidUrl(article.thumbnail) && (
-              <Link href={article.url_overridden_by_dest} target="_blank" aria-label="Thumbnail">
-                <Image
-                  src={article.thumbnail}
-                  alt={article.title}
-                  borderRadius={16}
-                  width={{ base: 114, md: 184 }}
-                  height={{ base: 86, md: 140 }}
-                />
-              </Link>
-            )}
-          </HStack>
-        </CardBody>
-      </Card>
-    </Link>
+        <Flex flexDirection="column" alignItems="flex-start" flex={1} overflow="hidden">
+          <Link
+            href={ArticleUtils.getArticleUrl(article.permalink)}
+            target="_blank"
+            fontSize="20px"
+            fontWeight={600}
+            maxW="100%"
+            textOverflow="ellipsis"
+            overflow="hidden"
+            whiteSpace="nowrap"
+          >
+            {article.title}
+          </Link>
+
+          <Text color="gray.700">
+            enviado há {DateUtils.getUnitTimeDiff(Date.now(), article.created)} por&nbsp;
+            <Link href={ArticleUtils.getAuthorUrl(article.author)} color="primary.500" target="_blank">
+              {article.author}
+            </Link>
+          </Text>
+
+          <Box mt="9px">
+            <Link href={article.url} target="_blank" fontWeight="semibold">
+              {ArticleUtils.isSelfDomain(article.domain) ? article.subreddit_name : article.domain}
+            </Link>
+          </Box>
+        </Flex>
+      </HStack>
+    </Box>
   );
 };
-
-const Article = memo(ArticleComponent);
-
-export { Article };
