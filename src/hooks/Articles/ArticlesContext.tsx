@@ -5,7 +5,7 @@ import { Article } from '@/types/Article';
 import { ListingsType } from '@/types/Subreddit';
 import { GetArticlesBySubRedditResponse, getArticlesBySubReddit } from '@/services/subreddit/subredditOperation';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DEFAULT_LIMIT } from '@/components/ArticlesList/ArticlesListData';
+import { DEFAULT_LIMIT } from '@/services/subreddit/subredditData';
 import { useToast } from '@chakra-ui/react';
 
 interface ArticlesContextData {

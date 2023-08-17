@@ -2,9 +2,9 @@ import { Button } from '@chakra-ui/react';
 
 import Navbar from '@/components/Navbar';
 import ArticlesList from '@/components/ArticlesList';
-import { useArticles } from '@/hooks/Articles';
-import { DEFAULT_LIMIT } from '@/components/ArticlesList/ArticlesListData';
 import { ArticleSkeleton } from '@/components/Article';
+import { useArticles } from '@/hooks/Articles';
+import { DEFAULT_LIMIT } from '@/services/subreddit/subredditData';
 
 function Main() {
   const { articles, isLoading, hasNextPage, isFetchingNextPage, currentListingType, fetchNextPage, changeListingType } =
