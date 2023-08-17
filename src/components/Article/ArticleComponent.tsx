@@ -37,7 +37,7 @@ export const ArticleComponent = ({ article }: ArticleComponentProps) => {
             {article.title}
           </Link>
 
-          <Text color="gray.700">
+          <Text color="gray.700" fontWeight={400}>
             enviado há {DateUtils.getUnitTimeDiff(Date.now(), article.created)} por&nbsp;
             <Link href={ArticleUtils.getAuthorUrl(article.author)} color="primary.500" target="_blank">
               {article.author}
@@ -45,7 +45,7 @@ export const ArticleComponent = ({ article }: ArticleComponentProps) => {
           </Text>
 
           <Box mt="9px">
-            <Link href={article.url} target="_blank" fontWeight="semibold">
+            <Link href={article.url} target="_blank" fontWeight={700}>
               {ArticleUtils.isSelfDomain(article.domain) ? article.subreddit_name : article.domain}
             </Link>
           </Box>
