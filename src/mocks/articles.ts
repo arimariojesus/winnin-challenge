@@ -15,4 +15,6 @@ export const mockArticle: Article = {
   author: 'john_long_foreskin',
   permalink: '/r/reactjs/comments/15n8anh/how_to_connect_reactvite_frontend_with_django/',
   url: 'https://www.reddit.com/r/reactjs/comments/15n8anh/how_to_connect_reactvite_frontend_with_django/',
+  domain: 'self.reactjs',
+  subreddit_name: 'reactjs',
 };

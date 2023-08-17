@@ -35,15 +35,15 @@ export class DateUtils {
     }
 
     if (diffHours > 0) {
-      return `${diffHours} h`;
+      return `${diffHours} ${diffHours > 1 ? 'horas' : 'hora'}`;
     }
 
     if (diffMinutes > 0) {
-      return `${diffMinutes} min`;
+      return `${diffMinutes} ${diffMinutes > 1 ? 'minutos' : 'minuto'}`;
     }
 
     if (diffSeconds > 0) {
-      return `${diffSeconds} seg`;
+      return `${diffSeconds} ${diffSeconds > 1 ? 'segundos' : 'segundo'}`;
     }
 
     return '';

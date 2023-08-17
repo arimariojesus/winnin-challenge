@@ -1,62 +1,31 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import { ArticlesListComponent } from '@/components/ArticlesList/ArticlesListComponent';
+import ArticlesList from '@/components/ArticlesList';
 import { mockArticle } from '@/mocks';
 
 const mockArticles = [mockArticle];
 
-type ComponentProps = React.ComponentProps<typeof ArticlesListComponent>;
+type ComponentProps = React.ComponentProps<typeof ArticlesList>;
 
 const mockProps: ComponentProps = {
   articles: mockArticles,
-  isLoading: false,
-  isError: false,
-  onRetry: () => {},
 };
 
 const makeSut = (props?: Partial<ComponentProps>) => {
-  return <ArticlesListComponent {...{ ...mockProps, ...props }} />;
+  return <ArticlesList {...{ ...mockProps, ...props }} />;
 };
 
-describe('ArticlesListComponent', () => {
+describe('ArticlesList', () => {
   it('should renders articles correctly', () => {
     render(makeSut());
 
     mockArticles.forEach((article) => {
-      const articleTitle = screen.getByRole('heading', { name: article.title });
+      const articleTitle = screen.getByText(article.title);
+      const articleAuthor = screen.getByText(article.author);
+
       expect(articleTitle).toBeInTheDocument();
+      expect(articleAuthor).toBeInTheDocument();
     });
-  });
-
-  it('should renders loading skeletons when isLoading is true', () => {
-    render(makeSut({ isLoading: true }));
-    const skeletonElements = screen.getAllByRole('alert', { busy: true });
-
-    skeletonElements.forEach((skeletonElement) => {
-      expect(skeletonElement).toBeInTheDocument();
-    });
-  });
-
-  it('should renders error message when isError is true', () => {
-    render(makeSut({ isError: true }));
-
-    const errorMessage = screen.getByText(/Ops! Não foi possível carregar as informações/i);
-    expect(errorMessage).toBeInTheDocument();
-  });
-
-  it('should calls onRetry when isError is true and click on retry button', () => {
-    const mockRetry = jest.fn();
-    render(makeSut({ isError: true, onRetry: mockRetry }));
-
-    const retryButton = screen.getByRole('button', { name: /Tentar novamente/i });
-    fireEvent.click(retryButton);
-    expect(mockRetry).toHaveBeenCalled();
-  });
-
-  it('should does not render retry button when onRetry is not provided', () => {
-    render(makeSut());
-    const retryButton = screen.queryByRole('button', { name: /Tentar novamente/i });
-    expect(retryButton).not.toBeInTheDocument();
   });
 });

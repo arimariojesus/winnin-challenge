@@ -1,2 +1,2 @@
 export * from './ArticleSkeleton';
-export { Article as default } from './ArticleComponent';
+export { ArticleComponent as default } from './ArticleComponent';

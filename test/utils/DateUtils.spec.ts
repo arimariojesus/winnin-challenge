@@ -29,38 +29,62 @@ describe('DateUtils', () => {
   describe('getUnitTimeDiff', () => {
     it('should generates a time ago string correctly for days', () => {
       const date1 = new Date('2023-08-01');
-      const date2 = new Date('2023-08-02');
+      let date2 = new Date('2023-08-02');
 
-      const unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+      let unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
 
       expect(unitTimeDiff).toBe('1 dia');
+
+      date2 = new Date('2023-08-03');
+
+      unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+
+      expect(unitTimeDiff).toBe('2 dias');
     });
 
     it('should generates a time ago string correctly for hours', () => {
       const date1 = new Date('2023-08-01T12:00:00');
-      const date2 = new Date('2023-08-01T15:30:00');
+      let date2 = new Date('2023-08-01T13:20:00');
 
-      const unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+      let unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
 
-      expect(unitTimeDiff).toBe('3 h');
+      expect(unitTimeDiff).toBe('1 hora');
+
+      date2 = new Date('2023-08-01T14:20:00');
+
+      unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+
+      expect(unitTimeDiff).toBe('2 horas');
     });
 
     it('should generates a time ago string correctly for minutes', () => {
       const date1 = new Date('2023-08-01T12:00:00');
-      const date2 = new Date('2023-08-01T12:15:00');
+      let date2 = new Date('2023-08-01T12:01:00');
 
-      const unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+      let unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
 
-      expect(unitTimeDiff).toBe('15 min');
+      expect(unitTimeDiff).toBe('1 minuto');
+
+      date2 = new Date('2023-08-01T12:15:00');
+
+      unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+
+      expect(unitTimeDiff).toBe('15 minutos');
     });
 
     it('should generates a time ago string correctly for seconds', () => {
       const date1 = new Date('2023-08-01T12:00:00');
-      const date2 = new Date('2023-08-01T12:00:05');
+      let date2 = new Date('2023-08-01T12:00:01');
 
-      const unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+      let unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
 
-      expect(unitTimeDiff).toBe('5 seg');
+      expect(unitTimeDiff).toBe('1 segundo');
+
+      date2 = new Date('2023-08-01T12:00:15');
+
+      unitTimeDiff = DateUtils.getUnitTimeDiff(date1, date2);
+
+      expect(unitTimeDiff).toBe('15 segundos');
     });
 
     it('should returns an empty string for same dates', () => {
