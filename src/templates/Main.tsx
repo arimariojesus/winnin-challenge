@@ -21,6 +21,7 @@ function Main() {
       <Button
         w="full"
         colorScheme="primary"
+        fontWeight={600}
         isLoading={isFetchingNextPage}
         isDisabled={!hasNextPage}
         onClick={() => fetchNextPage()}
